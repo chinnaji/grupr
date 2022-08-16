@@ -9,6 +9,7 @@ import { auth } from "../config";
 import { useRouter } from "next/router";
 import saveNewUser from "../helpers/saveNewUser";
 import LoadingButton from "./LoadingButton";
+import SignInWithGoogle from "./SignInWithGoogle";
 
 function LoginForm() {
   const [password, setPassword] = useState("");
@@ -31,17 +32,16 @@ function LoginForm() {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
-        // console.log(res);
         // stop loading animation
         setIsLoading(false);
         router.push("/dashboard");
         // history.back()
       })
       .catch((err) => {
-        // console.log(err.code);
-        setMessage(err.message.replaceAll("Firebase:", ""));
         // stop loading animation
         setIsLoading(false);
+
+        setMessage(err.message.replaceAll("Firebase:", ""));
       });
   };
 
@@ -72,7 +72,7 @@ function LoginForm() {
       <h1 className="text-3xl font-bold text-purple-400 text-center">
         Welcome Back!
       </h1>
-      <form className="mt-10 w-full " onSubmit={(event) => logIn(event)}>
+      <form className="mt-5 w-full " onSubmit={(event) => logIn(event)}>
         {/* error message */}
         {message ? (
           <p className="  w-full bg-red-500 py-3 px-2 text-center text-sm font-extralight text-white ">
@@ -103,14 +103,8 @@ function LoginForm() {
           onClick={signInWithEmailAndPassword}
           text="Log In"
         />
-        {/* <button type="submit">Log In</button> */}
-        <button
-          onClick={signInWithGoogleProvider}
-          type="button"
-          className="flex items-center border  justify-center px-2 py-4 outline-none   rounded-md text-zinc-800 font-semibold  mt-3 w-full"
-        >
-          <FcGoogle className="text-2xl mr-3" /> Log In With Google
-        </button>
+        <SignInWithGoogle setMessage={setMessage} text="Log In With Google" />
+
         <p className="mt-7 text-center">
           Don&apos;t have an account?{" "}
           <a href="/signup" className="font-semibold text-purple-400">
