@@ -8,11 +8,12 @@ import {
 import { auth } from "../config";
 import { useRouter } from "next/router";
 import saveNewUser from "../helpers/saveNewUser";
+import LoadingButton from "./LoadingButton";
 
 function LoginForm() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false);
   // sign up error message
   const [message, setMessage] = useState(null);
 
@@ -31,12 +32,16 @@ function LoginForm() {
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
         // console.log(res);
+        // stop loading animation
+        setIsLoading(false);
         router.push("/dashboard");
         // history.back()
       })
       .catch((err) => {
         // console.log(err.code);
         setMessage(err.message.replaceAll("Firebase:", ""));
+        // stop loading animation
+        setIsLoading(false);
       });
   };
 
@@ -93,12 +98,12 @@ function LoginForm() {
           placeholder="Password"
           className="p-3 my-3  outline-none focus:border-1 focus:border-purple-200 rounded-md bg-purple-100 text-purple-300 w-full"
         />
-        <button
-          type="submit"
-          className="px-2 py-4 outline-none   rounded-md text-zinc-100 font-semibold hover:bg-purple-500 transition-all ease-in-out bg-purple-400  mt-3 w-full"
-        >
-          Log In
-        </button>
+        <LoadingButton
+          isLoading={isLoading}
+          onClick={signInWithEmailAndPassword}
+          text="Log In"
+        />
+        {/* <button type="submit">Log In</button> */}
         <button
           onClick={signInWithGoogleProvider}
           type="button"
