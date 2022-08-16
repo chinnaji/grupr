@@ -8,9 +8,10 @@ function Footer() {
   const [email, setEmail] = useState(" ");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  useLayoutEffect(() => {
-    setIsNewletter(router.pathname == "/" ? true : false);
-  });
+  // typeof window &&
+  //   useLayoutEffect(() => {
+  //     setIsNewletter(router.pathname == "/" ? true : false);
+  //   });
 
   const handleSubNewsletter = (e: any) => {
     e.preventDefault();

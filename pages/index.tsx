@@ -62,7 +62,7 @@ const Home: NextPage = () => {
             links with one short URL. Create your
             <span className="text-orange-500"> Grup </span>
             and share in seconds.
-            <div className="w-9 h-9 rotate-90 rounded-full absolute left-0 md:-bottom-32 -bottom-10 ">
+            <p className="w-9 h-9 rotate-90 rounded-full absolute left-0 md:-bottom-32 -bottom-10 ">
               <Image
                 src={link}
                 alt="Chart"
@@ -71,7 +71,7 @@ const Home: NextPage = () => {
                 priority
                 loading="eager"
               />
-            </div>
+            </p>
           </p>
 
           <Grupr />
