@@ -16,6 +16,7 @@ import groupLinks from "../images/groupLinks.png";
 import { BsFillGrid1X2Fill } from "react-icons/bs";
 import { FaThList } from "react-icons/fa";
 import Testimonials from "../components/Testimonials";
+import Link from "next/link";
 // import logo from "../images/logo.png";
 const Home: NextPage = () => {
   return (
@@ -264,7 +265,28 @@ const Home: NextPage = () => {
         </section>
         {/* <Testimonials /> */}
       </main>
-
+      <section className=" relative shadow max-w-5xl text-center mx-auto px-3 bg-purple-400 my-5 py-12 rounded-lg">
+        {/* decors */}
+        <div className="-left-[220px] -top-[10px] border-zinc-100/10 border-2 bg-transparent w-80 h-80 rounded-full  absolute"></div>
+        <div className="-right-[220px] -top-[10px] border-zinc-100/10 border-2 bg-transparent w-80 h-80 rounded-full  absolute"></div>
+        {/* <div className="-left-[210px] -top-[10px] border-zinc-100/20 border-2 bg-transparent w-80 h-80 rounded-full  absolute"></div> */}
+        {/* decors */}
+        <h2 className="text-3xl font-bold text-purple-100 ">
+          Ready to get started?
+        </h2>
+        <p className="mt-6 text-sm md:text-base max-w-xl mx-auto  relative text-zinc-100">
+          Get started shortening and sharing your links in no time, with zero
+          stress and zero hassle.
+        </p>
+        <Link href="/signup">
+          <a
+            type="submit"
+            className="md:px-10 mt-5 px-6  hover:bg-zinc-100/90 hover:backdrop:blur  py-4 outline-none bg-zinc-100 w-fit rounded-md  font-semibold hover:bg-purple-500 transition-all ease-in-out mx-auto"
+          >
+            Sign Up!
+          </a>
+        </Link>
+      </section>
       {/* soft blur items */}
 
       <section className=" md:block hidden">
