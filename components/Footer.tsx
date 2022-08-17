@@ -85,7 +85,7 @@ function Footer() {
           </p>
         ) : null}
       </form>
-      <section className="py-5 px-3  ">
+      <section className="py-5 px-3  border-t">
         <p className="text-md md:text-xl max-w-3xl mx-auto text-center relative text-zinc-600">
           Made With <BsHeartFill className="text-red-600/70 inline" /> by{" "}
           <a

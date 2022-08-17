@@ -266,7 +266,7 @@ const Home: NextPage = () => {
         {/* <Testimonials /> */}
       </main>
       <section className="p-5 max-w-5xl mx-auto ">
-        <div className="  relative shadow text-center md:mx-auto px-3 bg-purple-400 mb-32 mt-24 py-12 rounded-lg">
+        <div className="  relative shadow text-center md:mx-auto px-3 bg-purple-400 mb-12 mt-24 py-12 rounded-lg">
           {/* decors */}
           <div className="-left-[220px] -top-[10px] border-zinc-100/10 border-2 bg-transparent w-80 h-80 rounded-full  absolute"></div>
           <div className="-right-[220px] -top-[10px] border-zinc-100/10 border-2 bg-transparent w-80 h-80 rounded-full  absolute"></div>
