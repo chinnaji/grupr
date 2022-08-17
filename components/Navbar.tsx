@@ -126,7 +126,7 @@ function Navbar() {
           )} */}
           <CgMenu
             onClick={() => setIsSidebar(true)}
-            className="ml-3 mr-1  cursor-pointer text-3xl"
+            className="ml-3 mr-1  cursor-pointer text-2xl"
           />
         </div>
       </nav>

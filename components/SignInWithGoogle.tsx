@@ -46,7 +46,7 @@ function SignInWithGoogle({ setMessage, text }: any) {
       <button
         onClick={() => !isLoading && signUpWithGoogleProvider()}
         type="button"
-        className="flex items-center border  justify-center px-2 py-4 outline-none   rounded-md text-zinc-800 font-semibold  mt-3 w-full"
+        className="flex transition-all ease-in-out duration-200 hover:bg-zinc-100 items-center border  justify-center px-2 py-4 outline-none   rounded-md text-zinc-800 font-semibold  mt-3 w-full"
       >
         {isLoading ? (
           <>

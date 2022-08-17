@@ -52,7 +52,7 @@ const Home: NextPage = () => {
         <meta name="twitter:image" content="/logo.png" />
         {/* <meta name="twitter:image:alt" content=Lets get Grupn /> */}
       </Head>
-      <main className=" flex w-full flex-1 flex-col items-center justify-center px-5 text-center max-w-5xl pt-24 mx-auto ">
+      <main className=" flex w-full flex-1 flex-col items-center justify-center px-5 text-center max-w-5xl pt-20 mx-auto ">
         <section className="relative w-full ">
           <h1 className="text-4xl md:text-5xl font-bold text-purple-400 text-center">
             Shorten <span className="text-orange-500">multiple links</span>,
@@ -265,27 +265,29 @@ const Home: NextPage = () => {
         </section>
         {/* <Testimonials /> */}
       </main>
-      <section className=" relative shadow max-w-5xl text-center mx-auto px-3 bg-purple-400 my-5 py-12 rounded-lg">
-        {/* decors */}
-        <div className="-left-[220px] -top-[10px] border-zinc-100/10 border-2 bg-transparent w-80 h-80 rounded-full  absolute"></div>
-        <div className="-right-[220px] -top-[10px] border-zinc-100/10 border-2 bg-transparent w-80 h-80 rounded-full  absolute"></div>
-        {/* <div className="-left-[210px] -top-[10px] border-zinc-100/20 border-2 bg-transparent w-80 h-80 rounded-full  absolute"></div> */}
-        {/* decors */}
-        <h2 className="text-3xl font-bold text-purple-100 ">
-          Ready to get started?
-        </h2>
-        <p className="mt-6 text-sm md:text-base max-w-xl mx-auto  relative text-zinc-100">
-          Get started shortening and sharing your links in no time, with zero
-          stress and zero hassle.
-        </p>
-        <Link href="/signup">
-          <a
-            type="submit"
-            className="md:px-10 mt-5 px-6  hover:bg-zinc-100/90 hover:backdrop:blur  py-4 outline-none bg-zinc-100 w-fit rounded-md  font-semibold hover:bg-purple-500 transition-all ease-in-out mx-auto"
-          >
-            Sign Up!
-          </a>
-        </Link>
+      <section className="p-5 max-w-5xl mx-auto ">
+        <div className="  relative shadow text-center md:mx-auto px-3 bg-purple-400 mb-32 mt-24 py-12 rounded-lg">
+          {/* decors */}
+          <div className="-left-[220px] -top-[10px] border-zinc-100/10 border-2 bg-transparent w-80 h-80 rounded-full  absolute"></div>
+          <div className="-right-[220px] -top-[10px] border-zinc-100/10 border-2 bg-transparent w-80 h-80 rounded-full  absolute"></div>
+          {/* <div className="-left-[210px] -top-[10px] border-zinc-100/20 border-2 bg-transparent w-80 h-80 rounded-full  absolute"></div> */}
+          {/* decors */}
+          <h2 className="text-3xl font-bold text-purple-100 ">
+            Ready to get started?
+          </h2>
+          <p className="mt-6 text-sm md:text-base max-w-xl mx-auto  relative text-zinc-100">
+            Get started shortening and sharing your links in no time, with zero
+            stress and zero hassle.
+          </p>
+          <Link href="/signup">
+            <a
+              type="submit"
+              className="md:px-10 mt-5 px-6  hover:bg-zinc-100/90 hover:backdrop:blur  py-4 outline-none bg-zinc-100 w-fit rounded-md  font-semibold hover:bg-purple-500 transition-all ease-in-out mx-auto"
+            >
+              Sign Up!
+            </a>
+          </Link>
+        </div>
       </section>
       {/* soft blur items */}
 
