@@ -107,7 +107,7 @@ function Navbar() {
         </div>{" "}
         {/* open mobile menu button */}
         <div className="ml-auto flex items-center gap-x-2 lg:hidden">
-          {checkAuth() ? (
+          {/* {checkAuth() ? (
             <button
               className="hover:bg-purple-500 transition-all ease-in-out bg-purple-400  text-zinc-100 rounded-md flex flex-col items-center  px-4 py-2   font-medium text-sm"
               onClick={signout}
@@ -123,7 +123,7 @@ function Navbar() {
                 Sign Up
               </a>
             </Link>
-          )}
+          )} */}
           <CgMenu
             onClick={() => setIsSidebar(true)}
             className="ml-3 mr-1  cursor-pointer text-3xl"
