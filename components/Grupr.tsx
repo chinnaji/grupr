@@ -38,6 +38,7 @@ function Grupr() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
     setIsLoading(true);
     var newUrls = [];
     // if csv file is uploaded
@@ -72,8 +73,16 @@ function Grupr() {
       } else {
         handleErrnLoading("Error creating Grup, Please try again");
       }
-      console.log(validateUrls);
+      // console.log(validateUrls);
     } else {
+      if (title.length < 1) {
+        handleErrnLoading("Please provide a title");
+        return;
+      }
+      if (textArealinks.length < 5) {
+        handleErrnLoading("Please provide some links");
+        return;
+      }
       const urls = textArealinks.trim().split("\n");
       // validate urls
       const validateUrls = handleGruprValidation(urls);
@@ -155,7 +164,6 @@ function Grupr() {
               }
               onChange={(e) => settextArealinks(e.target.value)}
               autoFocus={false}
-              required
               rows={7}
             ></textarea>
           )}
@@ -222,6 +230,7 @@ function Grupr() {
                 type="text"
                 readOnly
                 disabled
+                required
                 value={grupUrl}
                 className="px-3 py-4 my-2 outline-none focus:border-1 focus:border-purple-200 rounded-md bg-purple-100 text-purple-300 w-full"
               />

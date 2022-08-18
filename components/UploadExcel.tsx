@@ -43,7 +43,6 @@ function UploadExcel({ title, excelFile, setExcelFile }: UploadExcelProps) {
           // accept=".xlsx, .xls"
           accept=".csv"
           type="file"
-          required
           className="absolute inset-0 opacity-0 cursor-pointer"
         />
       </div>
