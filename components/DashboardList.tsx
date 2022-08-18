@@ -5,6 +5,7 @@ import CopyToClipboard from "./CopyToClipboard";
 import { AiOutlineDelete } from "react-icons/ai";
 import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../config";
+import Link from "next/link";
 function DashboardList({ data }: any) {
   async function handleDelete(id: string) {
     const confirm = prompt("Type 'yes' to confirm delete " + data.title);
@@ -28,14 +29,11 @@ function DashboardList({ data }: any) {
       </div> */}
       <div className="flex flex-col mr-auto overflow-hidden max-w-[70%] ">
         <h3 className="text-zinc-800 w-full truncate">{data.title}</h3>
-        <a
-          target="_blank"
-          // href={data.fullUrl}
-          href={"/" + data.grupId}
-          className=" md:text-md text-sm font-medium "
-        >
-          grupr.nl/{data.grupId}
-        </a>
+        <Link href={"/" + data.grupId}>
+          <a className=" md:text-md text-sm font-medium ">
+            grupr.nl/{data.grupId}
+          </a>
+        </Link>
       </div>
 
       <div className="ml-auto  flex gap-x-3">

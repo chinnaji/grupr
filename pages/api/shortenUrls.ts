@@ -21,7 +21,7 @@ export default async function handler(
       fullUrl: `https://www.grupr.nl/${grupId} `,
       dateCreated: new Date().toISOString(),
       createdBy: req.body.createdBy,
-      destinations: req.body.destinations,
+      destinations: req.body.urls,
       title: req.body.title,
     };
 
@@ -30,6 +30,10 @@ export default async function handler(
       await setDoc(doc(db, "grups", grupId), result);
     } catch (err) {
       // console.log(err);
+      return res.status(302).json({
+        code: 404,
+        message: "failed",
+      });
     }
 
     // console.log(result);

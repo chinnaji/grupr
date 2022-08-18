@@ -5,11 +5,16 @@ import Image from "next/image";
 import party from "../images/party.png";
 import { FiExternalLink } from "react-icons/fi";
 import axios from "axios";
-import { handleGruprSubmit } from "../helpers/handleGruprSubmit";
+import {
+  saveGrupr,
+  handleCsv,
+  handleGruprValidation,
+} from "../helpers/handleGruprSubmit";
 import CopyToClipboard from "./CopyToClipboard";
 import Share from "./Share";
 import { checkAuth } from "../helpers/checkAuth";
 import Link from "next/link";
+// import {handleCsv} from "../helpers/handleCsvSubmit";
 function Grupr() {
   const [isExcel, setisExcel] = useState(false);
   const [isModal, setIsModal] = useState(false);
@@ -18,28 +23,78 @@ function Grupr() {
   const [grupUrl, setGrupUrl] = useState("");
   const [excelFile, setExcelFile] = useState<File[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [err, setErr] = useState("");
   const user = checkAuth();
   const createdBy = user ? user.uid : "Anonymous";
   // console.log({ createdBy });
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setIsLoading(true);
+    var newUrls = [];
+    // if csv file is uploaded
+    if (isExcel) {
+      // get csv files as array
+      const newUrls = await handleCsv(excelFile);
+      // check type of newUrls
+      // if type is string, means error
+      if (typeof newUrls === "string") {
+        setErr(newUrls);
+        setIsLoading(false);
+        return;
+      }
+
+      // validate urls
+      const validateUrls = handleGruprValidation(newUrls);
+      // if validation response is string, means error
+      if (typeof validateUrls === "string") {
+        setErr(validateUrls);
+        setIsLoading(false);
+        return;
+      }
+
+      // if no error, submit to database
+
+      console.log(validateUrls);
+    } else {
+      const urls = textArealinks.trim().split("\n");
+      // validate urls
+      const validateUrls = handleGruprValidation(urls);
+      // if validation response is string, means error
+      if (typeof validateUrls === "string") {
+        setErr(validateUrls);
+        setIsLoading(false);
+        return;
+      }
+
+      // if no error, save to database
+      const { code, fullUrl } = await saveGrupr({
+        urls: validateUrls,
+        createdBy,
+        title,
+      });
+      if (code === 200) {
+        setGrupUrl(fullUrl);
+        setIsModal(true);
+        setIsLoading(false);
+      } else {
+        setErr("Error creating Grup, Please try again");
+        setIsLoading(false);
+      }
+    }
+  };
+
   return (
     <>
       <form
         id="grupr"
-        onSubmit={(e) =>
-          handleGruprSubmit({
-            isExcel,
-            textArealinks,
-            setGrupUrl,
-            setIsModal,
-            setIsLoading,
-            title,
-            excelFile,
-            createdBy,
-            e,
-          })
-        }
+        onSubmit={handleSubmit}
         className="shadow-md rounded-lg p-2 overflow-hidden relative bg-white flex flex-wrap max-w-xl mt-10 mx-auto border-purple-200/5 border-2"
       >
+        {err.length > 0 ? (
+          <p className="mx-2 rounded w-full bg-red-200 text-red-500  my-3 p-3 text-center text-sm font-medium  ">
+            {err}
+          </p>
+        ) : null}
         {/* title  */}
         <div className="w-full md:w-[75%] p-2 order-2 md:order-none">
           <input
@@ -80,7 +135,7 @@ function Grupr() {
               title="Input links line by line"
               className="p-3 outline-none focus:border-1 focus:border-purple-200 rounded-md bg-purple-100 text-purple-300 w-full"
               placeholder={
-                "https://www.androidpill.com/\nhttps://www.dribbble.com/\nhttps://www.activision.com/\nhttps://www.google.com/"
+                "https://www.androidpill.com/\nwww.dribbble.com/\nhttps://www.activision.com/\nhttps://www.google.com/"
               }
               onChange={(e) => settextArealinks(e.target.value)}
               autoFocus={false}
@@ -170,6 +225,7 @@ function Grupr() {
                 <a
                   onClick={() => setIsModal(false)}
                   href={grupUrl.slice(20, -1)}
+                  target="_blank"
                   className="px-2  py-4 outline-none  lg:my-2 flex gap-x-3  justify-center items-center rounded-md text-zinc-100 font-semibold hover:bg-purple-500 transition-all ease-in-out bg-purple-400  w-full"
                 >
                   <FiExternalLink className="text-xl" /> Preview

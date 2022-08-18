@@ -1,82 +1,70 @@
 import axios from "axios";
 import { TgetShortenDataProps, TsubmitProps } from "../types";
 
-const handleGruprSubmit = (params: TsubmitProps) => {
-  const {
-    e,
-    isExcel,
-    textArealinks,
-    setGrupUrl,
-    setIsModal,
-    title,
-    excelFile,
-    createdBy,
-    setIsLoading,
-  } = params;
-  e.preventDefault();
-  setIsLoading(true);
-  if (isExcel) {
-    // console.log(excelFile);
-    const fileReader = new FileReader();
-    fileReader.onload = (e: any) => {
-      const data = e.target.result;
-      const csvLinks = data.split("\r\n");
-      // format links input to remove empty strings
-      const destinations = csvLinks.filter((link: any) => link !== "");
+export const handleGruprValidation = (urls: any) => {
+  const newUrls = [];
+  // const urls = links.trim().split("\n");
+  // console.log({ urls });
+  for (let i = 0; i < urls.length; i++) {
+    const formatProtocol =
+      urls[i].slice(0, 2) == "//"
+        ? "http:" + urls[i]
+        : urls[i].slice(0, 3) == "www"
+        ? "http://" + urls[i]
+        : urls[i]; //dummy protocol so that URL works
+    // console.log({ formatProtocol });
+    try {
+      const checkUrl = new URL(formatProtocol);
+      newUrls.push(checkUrl.href);
+      // console.log({ checkUrl });
+    } catch (e: any) {
+      return "Invalid Url, please check again";
+    }
+  }
+  return newUrls;
+};
 
-      //   console.log({
-      //     destinations,
-      //     setGrupUrl,
-      //     setIsModal,
-      //     title,
-      //   });
-      getShortenData({
-        destinations,
-        setGrupUrl,
-        setIsModal,
-        title,
-        createdBy,
-        setIsLoading,
-      });
+function readFileAsync(file: any) {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result);
     };
-    fileReader.readAsText(excelFile);
-  } else {
-    const newLinks = textArealinks.split("\n");
-    // format links input to remove empty strings
-    const destinations = newLinks.filter((link: any) => link !== "");
 
-    getShortenData({
-      setGrupUrl,
-      setIsModal,
-      title,
-      destinations,
-      createdBy,
-      setIsLoading,
-    });
+    reader.onerror = reject;
+
+    reader.readAsText(file);
+  });
+}
+
+export const handleCsv = async (excelFile: any) => {
+  // console.log(excelFile);
+  try {
+    let csvData: any = await readFileAsync(excelFile);
+    if (csvData.length > 0) {
+      return csvData.trim().split("\r\n");
+    } else {
+      return "Empty File, please check again";
+    }
+  } catch (err) {
+    return "Error with File, please check again";
   }
 };
-function getShortenData({
-  destinations,
-  setGrupUrl,
-  setIsModal,
-  title,
-  createdBy,
-  setIsLoading,
-}: TgetShortenDataProps) {
-  // axios post request to server
 
-  axios
-    .post("/api/shortenUrls", { destinations, title, createdBy })
+export const saveGrupr = async ({ urls, title, createdBy }: any) => {
+  // return { urls, title, createdBy };
+  return await axios
+    .post("/api/shortenUrls", { urls, title, createdBy })
     .then((res) => {
       const { fullUrl } = res.data;
-      setGrupUrl(fullUrl);
-      setIsModal(true);
-      setIsLoading(false);
+      // console.log(res.data);
+
+      return res.data;
     })
     .catch((err) => {
-      setIsLoading(false);
+      return err;
 
       // console.log(err);
     });
-}
-export { handleGruprSubmit };
+};

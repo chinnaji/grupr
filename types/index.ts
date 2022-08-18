@@ -22,7 +22,7 @@ export interface TsubmitProps extends TgetShortenDataProps {
   isExcel: boolean;
   textArealinks: string;
   excelFile: any;
-  e: any;
+  // e: any;
   createdBy: string;
 }
 
