@@ -79,10 +79,10 @@ function Grupr() {
         handleErrnLoading("Please provide a title");
         return;
       }
-      if (textArealinks.length < 5) {
-        handleErrnLoading("Please provide some links");
-        return;
-      }
+      // if (textArealinks.length < 5) {
+      //   handleErrnLoading("Please provide some links");
+      //   return;
+      // }
       const urls = textArealinks.trim().split("\n");
       // validate urls
       const validateUrls = handleGruprValidation(urls);

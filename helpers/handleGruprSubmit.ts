@@ -12,7 +12,7 @@ export const handleGruprValidation = (urls: any) => {
         : urls[i].slice(0, 3) == "www"
         ? "http://" + urls[i]
         : urls[i]; //dummy protocol so that URL works
-    // console.log({ formatProtocol });
+    console.log({ formatProtocol });
     try {
       const checkUrl = new URL(formatProtocol);
       newUrls.push(checkUrl.href);

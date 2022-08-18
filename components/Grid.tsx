@@ -4,6 +4,7 @@ import formatUrl from "../helpers/formatUrl";
 function Grid({ title, url, image }: TLayoutProps) {
   return (
     <a
+      target="_blank"
       href={url}
       className="shadow-md overflow-hidden  bg-purple-400  rounded-lg p-0"
     >
