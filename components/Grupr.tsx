@@ -27,6 +27,15 @@ function Grupr() {
   const user = checkAuth();
   const createdBy = user ? user.uid : "Anonymous";
   // console.log({ createdBy });
+
+  const handleErrnLoading = (err: string) => {
+    setErr(err);
+    setIsLoading(false);
+    setTimeout(() => {
+      setErr("");
+    }, 3000);
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setIsLoading(true);
@@ -38,8 +47,7 @@ function Grupr() {
       // check type of newUrls
       // if type is string, means error
       if (typeof newUrls === "string") {
-        setErr(newUrls);
-        setIsLoading(false);
+        handleErrnLoading(newUrls);
         return;
       }
 
@@ -47,22 +55,7 @@ function Grupr() {
       const validateUrls = handleGruprValidation(newUrls);
       // if validation response is string, means error
       if (typeof validateUrls === "string") {
-        setErr(validateUrls);
-        setIsLoading(false);
-        return;
-      }
-
-      // if no error, submit to database
-
-      console.log(validateUrls);
-    } else {
-      const urls = textArealinks.trim().split("\n");
-      // validate urls
-      const validateUrls = handleGruprValidation(urls);
-      // if validation response is string, means error
-      if (typeof validateUrls === "string") {
-        setErr(validateUrls);
-        setIsLoading(false);
+        handleErrnLoading(validateUrls);
         return;
       }
 
@@ -77,8 +70,31 @@ function Grupr() {
         setIsModal(true);
         setIsLoading(false);
       } else {
-        setErr("Error creating Grup, Please try again");
+        handleErrnLoading("Error creating Grup, Please try again");
+      }
+      console.log(validateUrls);
+    } else {
+      const urls = textArealinks.trim().split("\n");
+      // validate urls
+      const validateUrls = handleGruprValidation(urls);
+      // if validation response is string, means error
+      if (typeof validateUrls === "string") {
+        handleErrnLoading(validateUrls);
+        return;
+      }
+
+      // if no error, save to database
+      const { code, fullUrl } = await saveGrupr({
+        urls: validateUrls,
+        createdBy,
+        title,
+      });
+      if (code === 200) {
+        setGrupUrl(fullUrl);
+        setIsModal(true);
         setIsLoading(false);
+      } else {
+        handleErrnLoading("Error creating Grup, Please try again");
       }
     }
   };
