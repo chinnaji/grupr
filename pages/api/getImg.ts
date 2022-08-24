@@ -4,6 +4,7 @@ import { setDoc, doc } from "firebase/firestore";
 import fs from "fs";
 import path from "path";
 import { customAlphabet } from "nanoid";
+import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
 
 const filePath = path.resolve(".", "images_folder/img.png");
 const imageBuffer = fs.readFileSync(filePath);
@@ -14,14 +15,13 @@ export default async function (req: any, res: any) {
   // generate a random id for the grup
   const getHash = customAlphabet(characters, 6);
   const id = getHash();
-  const { method, url, headers } = req;
-  var ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
+  const ck = getCookies({ req, res });
 
   //   const data = { ip, method, url, headers };
-  const data = { cookie: req.headers.cookie };
-  console.log(req);
+  const data = { ck };
+  console.log(data);
   res.setHeader("Content-Type", "image/jpg");
-  //   console.log(req.headers.cookie);
+  console.log(req.headers.cookie);
   try {
     //  save user info to db and use user id as doc id
     await setDoc(doc(db, "test", id), data);

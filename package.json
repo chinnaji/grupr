@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "cookies-next": "^2.1.1",
     "firebase": "^9.9.2",
     "firebase-admin": "^11.0.1",
     "link-preview-js": "^3.0.3",
