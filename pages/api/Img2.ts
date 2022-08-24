@@ -31,6 +31,7 @@ export default async function (req: any, res: any) {
       code: 404,
       message: "failed",
       err,
+      data,
     });
   }
   return res.send(imageBuffer);
