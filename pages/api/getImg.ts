@@ -17,20 +17,22 @@ export default async function (req: any, res: any) {
   const { method, url, headers } = req;
   var ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
 
-  const data = { ip, method, url, headers };
+  //   const data = { ip, method, url, headers };
+  const data = { cookie: req.headers.cookie };
 
   res.setHeader("Content-Type", "image/jpg");
-  try {
-    //  save user info to db and use user id as doc id
-    await setDoc(doc(db, "test", id), data);
-  } catch (err) {
-    console.log(err);
-    return res.status(302).json({
-      code: 404,
-      message: "failed",
-      err,
-    });
-  }
+  //   console.log(req.headers.cookie);
+  //   try {
+  //     //  save user info to db and use user id as doc id
+  //     await setDoc(doc(db, "test", id), data);
+  //   } catch (err) {
+  //     console.log(err);
+  //     return res.status(302).json({
+  //       code: 404,
+  //       message: "failed",
+  //       err,
+  //     });
+  //   }
   return res.send(imageBuffer);
 
   //   rawHeaders
