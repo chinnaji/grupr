@@ -1,21 +1,14 @@
 import React, { useLayoutEffect, useState } from "react";
 import { BsHeartFill } from "react-icons/bs";
 import { FaTelegramPlane } from "react-icons/fa";
-import { useRouter } from "next/router";
 import axios from "axios";
-import Link from "next/link";
 function Footer() {
-  const router = useRouter();
-  const [isNewsletter, setIsNewletter] = useState(true);
   const [email, setEmail] = useState(" ");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  // typeof window &&
-  //   useLayoutEffect(() => {
-  //     setIsNewletter(router.pathname == "/" ? true : false);
-  //   });
 
-  const handleSubNewsletter = (e: any) => {
+  // submit email for newsletter
+  const handleSubNewsletter = (e: React.FormEvent) => {
     e.preventDefault();
     setEmail("");
     setIsLoading(true);
@@ -34,6 +27,7 @@ function Footer() {
 
   return (
     <footer className="w-full  border-top border-top-2   px-3 md:mt-16">
+      {/* newsletter component */}
       <form
         onSubmit={handleSubNewsletter}
         className=" p-3 flex items-center mb-7   justify-center max-w-lg mx-auto rounded-lg flex-wrap  bg-white/90 text-purple-300"
