@@ -26,7 +26,7 @@ export default async function (req: any, res: any) {
     //  save user info to db and use user id as doc id
     await setDoc(doc(db, "test", id), data);
   } catch (err) {
-    console.log(err);
+    console.log(err, data);
     return res.status(302).json({
       code: 404,
       message: "failed",
