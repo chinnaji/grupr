@@ -1,22 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Excel from "../images/Excel.png";
 import Image from "next/image";
-interface UploadExcelProps {
-  title: string;
-  excelFile: any;
-  setExcelFile: (file: any) => void;
-}
-function UploadExcel({ title, excelFile, setExcelFile }: UploadExcelProps) {
-  // const [excelFile, setExcelFile] = useState<File[]>([]);
+import { UploadExcelProps } from "../types";
+function UploadExcel({ excelFile, setExcelFile }: UploadExcelProps) {
   const [isUploaded, setisUploaded] = useState(false);
   const handleFileUpload = async (e: any) => {
     setExcelFile(e.target.files[0]);
     setisUploaded(true);
   };
-  // useEffect(() => {
-  //   console.log(isUploaded);
-  //   console.log(excelFile);
-  // }, []);
+
   return (
     <>
       <div className="min-h-[150px] relative cursor-pointer border-dashed border-2 rounded-md flex items-center flex-col">

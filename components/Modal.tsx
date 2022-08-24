@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useEffect, useCallback } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { TModalProps } from "../types";
-function Modal({ setIsModal, children, isModal }: TModalProps) {
+function Modal({ setIsModal, children }: TModalProps) {
   // close on esc
   const escFunction = useCallback((e: any) => {
     if (e.keyCode === 27) {
@@ -9,11 +9,6 @@ function Modal({ setIsModal, children, isModal }: TModalProps) {
     }
   }, []);
   useEffect(() => {
-    // if (isModal) {
-    //   document.body.style.overflow = "hidden !important";
-    // } else {
-    //   document.body.style.overflow = "auto";
-    // }
     document.addEventListener("keydown", escFunction);
 
     return () => {

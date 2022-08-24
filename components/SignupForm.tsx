@@ -10,10 +10,12 @@ function SignupForm() {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const router = useRouter();
-  const [message, setMessage] = useState(null);
+  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const signUpWithEmailAndPassword = async (event: any) => {
+  const signUpWithEmailAndPassword = async (event: React.FormEvent) => {
+    //  start loading animation
+    setIsLoading(true);
     event.preventDefault();
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -26,8 +28,9 @@ function SignupForm() {
       setIsLoading(false);
       // redirect to dashboard after successful login
       router.push("/dashboard");
-    } catch (err: any) {
-      setMessage(err.message.replaceAll("Firebase:", ""));
+    } catch (err) {
+      setMessage((err as Error).message.replaceAll("Firebase:", ""));
+      // console.log(err);
       // stop loading animation
       setIsLoading(false);
     }
@@ -38,11 +41,7 @@ function SignupForm() {
       <h1 className="text-3xl font-bold text-purple-400 text-center">
         Create An Account!
       </h1>
-      {message ? (
-        <p className=" w-full bg-red-500 py-3 px-2 text-center text-sm font-extralight text-white ">
-          {message}
-        </p>
-      ) : null}
+
       <form
         className="mt-5 w-full "
         onSubmit={(event) => signUpWithEmailAndPassword(event)}
@@ -75,6 +74,11 @@ function SignupForm() {
           placeholder="Password"
           className="p-3 my-3  outline-none focus:border-1 focus:border-purple-200 rounded-md bg-purple-100 text-purple-300 w-full"
         />
+        {message ? (
+          <p className=" w-full bg-red-500 py-3 my-2px-2 text-center text-sm font-extralight text-white ">
+            {message}
+          </p>
+        ) : null}
         <LoadingButton isLoading={isLoading} text="Sign Up" />
 
         <SignInWithGoogle setMessage={setMessage} text="Sign Up With Google" />

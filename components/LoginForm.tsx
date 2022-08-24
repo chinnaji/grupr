@@ -28,7 +28,7 @@ function LoginForm() {
   const router = useRouter();
 
   // login Function
-  const logIn = (event: any) => {
+  const logIn = (event: React.FormEvent) => {
     event.preventDefault();
     // start loading animation
     setIsLoading(true);

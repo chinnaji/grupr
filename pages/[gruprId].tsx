@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  GetServerSidePropsContext,
-  GetStaticPathsContext,
-  GetStaticPropsContext,
-} from "next";
+import { GetStaticPathsContext, GetStaticPropsContext } from "next";
 import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../config";
 import Grid from "../components/Grid";
@@ -12,14 +8,13 @@ import { useRouter } from "next/router";
 import { FaThList } from "react-icons/fa";
 import { BsFillGrid1X2Fill } from "react-icons/bs";
 import testImg1 from "../images/d.png";
-import testImg2 from "../images/d2.png";
 import { getLinkPreview } from "link-preview-js";
 import Head from "next/head";
+import { grupIdProps, destinationsMetadataProps } from "../types";
 import GrupSkeleton from "../components/GrupSkeleton";
-function Index({ grupData, destinationsMetadata }: any) {
+function Index({ grupData, destinationsMetadata }: grupIdProps) {
   const [isListLayout, setIsListLayout] = useState(true);
   const { isFallback } = useRouter();
-  // console.log(grupData, isFallback);
 
   // const { destinations, title, grupId, fullUrl } = grupData;
   return isFallback ? (
@@ -94,7 +89,7 @@ function Index({ grupData, destinationsMetadata }: any) {
           </div>
         </div>
         <section className="w-full flex flex-wrap my-10 gap-y-3">
-          {grupData.destinations.map((destination: string, index: any) => (
+          {grupData.destinations.map((destination: string, index: number) => (
             <div
               key={index}
               className={`w-full md:w-1/2  transition-all ease-in-out px-3 ${
@@ -154,15 +149,14 @@ export async function getStaticProps(ctx: GetStaticPropsContext) {
     const grupData = docSnap.data();
     const { destinations } = grupData;
     // get the destinations metadata
-    const destinationsMetadata: any = [];
+    const destinationsMetadata: destinationsMetadataProps[] = [];
 
     // getLinkPreview for each destination
     await Promise.all(
       destinations.map(async (destination: string) => {
-        const preview: any = await getLinkPreview(destination as any, {
+        const preview: any = await getLinkPreview(destination, {
           followRedirects: "follow",
         });
-        // console.log(preview);
 
         // resturcture link preview data
         const newPreview = {
@@ -201,7 +195,7 @@ export async function getStaticProps(ctx: GetStaticPropsContext) {
   }
 }
 export async function getStaticPaths(ctx: GetStaticPathsContext) {
-  const grupsIds: any = [];
+  const grupsIds: Array<string> = [];
   const querySnapshot = await getDocs(collection(db, "grups"));
   querySnapshot.forEach((doc) => {
     grupsIds.push(doc.id);

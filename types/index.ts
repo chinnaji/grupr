@@ -1,7 +1,7 @@
 export interface TModalProps {
   setIsModal: (isModal: boolean) => void;
   children: JSX.Element;
-  isModal: boolean;
+  // isModal: boolean;
 }
 
 export interface TLayoutProps {
@@ -74,4 +74,31 @@ export interface dashboardListProps {
 export interface loadingButtonProps {
   isLoading: boolean;
   text: string;
+}
+
+export interface UploadExcelProps {
+  excelFile: any;
+  setExcelFile: (file: File) => void;
+}
+
+export interface grupDataProps {
+  dateCreated: string;
+  createdBy: string;
+  destinations: string[];
+  title: string;
+  grupId: string;
+  fullUrl: string;
+}
+
+export interface destinationsMetadataProps {
+  url: string;
+  title: string;
+  favicon: any;
+  image: string[];
+  description: string;
+}
+
+export interface grupIdProps {
+  grupData: grupDataProps;
+  destinationsMetadata: destinationsMetadataProps[];
 }

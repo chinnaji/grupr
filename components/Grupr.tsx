@@ -148,11 +148,7 @@ function Grupr() {
           {/*  file upload component */}
 
           {isExcel ? (
-            <UploadExcel
-              setExcelFile={setExcelFile}
-              excelFile={excelFile}
-              title={title}
-            />
+            <UploadExcel setExcelFile={setExcelFile} excelFile={excelFile} />
           ) : (
             // manual input component
             <textarea
@@ -206,7 +202,7 @@ function Grupr() {
 
       {/* Grupr success modal */}
       {isModal && (
-        <Modal setIsModal={setIsModal} isModal={isModal}>
+        <Modal setIsModal={setIsModal}>
           <>
             <h1 className="text-xl flex items-center gap-x-2 mx-auto w-fit mb-1 md:text-3xl font-bold text-purple-400 text-center">
               CONGRATULATIONS!
