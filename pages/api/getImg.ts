@@ -19,7 +19,7 @@ export default async function (req: any, res: any) {
 
   //   const data = { ip, method, url, headers };
   const data = { cookie: req.headers.cookie };
-
+  console.log(req);
   res.setHeader("Content-Type", "image/jpg");
   //   console.log(req.headers.cookie);
   try {
