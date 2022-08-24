@@ -4,7 +4,6 @@ import Modal from "../components/Modal";
 import Image from "next/image";
 import party from "../images/party.png";
 import { FiExternalLink } from "react-icons/fi";
-import axios from "axios";
 import {
   saveGrupr,
   readCsv,
@@ -13,8 +12,6 @@ import {
 import CopyToClipboard from "./CopyToClipboard";
 import Share from "./Share";
 import { checkAuth } from "../helpers/checkAuth";
-import Link from "next/link";
-// import {readCsv} from "../helpers/readCsvSubmit";
 function Grupr() {
   const [isExcel, setisExcel] = useState(false);
   const [isModal, setIsModal] = useState(false);

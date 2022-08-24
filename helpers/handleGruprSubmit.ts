@@ -1,26 +1,18 @@
 import axios from "axios";
 import { TgetShortenDataProps, TsubmitProps } from "../types";
-import urlRegex from "url-regex";
 
 export const handleGruprValidation = (urls: any) => {
-  const newUrls: any = [];
-  // const urls = links.trim().split("\n");
-  // console.log({ urls });
   for (let i = 0; i < urls.length; i++) {
     // check if each url is valid
-    const testUrl = urlRegex({ exact: true, strict: true }).test(urls[i]);
-    // ? urls[i]
-    // : false;
-    if (!testUrl) {
-      return "Invalid Url, please check again";
-    }
-    if (urls[i].includes("https://") || urls[i].includes("http://")) {
-      newUrls.push(urls[i]);
-    } else {
-      newUrls.push("http://" + urls[i]);
+    try {
+      new URL(urls[i]);
+    } catch (e) {
+      console.log(e);
+      // const toStr = e as Error;
+      return `Invalid Url - ${urls[i]}`;
     }
   }
-  return newUrls;
+  return urls;
 };
 
 function readFileAsync(file: any) {
