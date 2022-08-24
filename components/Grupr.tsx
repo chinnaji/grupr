@@ -18,7 +18,7 @@ function Grupr() {
   const [title, setTitle] = useState("");
   const [textArealinks, settextArealinks] = useState("");
   const [grupUrl, setGrupUrl] = useState("");
-  const [excelFile, setExcelFile] = useState<File[]>([]);
+  const [excelFile, setExcelFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [err, setErr] = useState("");
   const user = checkAuth();
@@ -32,7 +32,7 @@ function Grupr() {
     }, 3000);
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // validate title length
     if (title.length < 1) {
@@ -45,7 +45,8 @@ function Grupr() {
     // if csv file is uploaded
     if (isExcel) {
       // get csv files as array
-      const newUrls = await readCsv(excelFile);
+      const newUrls = await readCsv(excelFile as File);
+
       // check type of newUrls
       // if type is string, means error
       if (typeof newUrls === "string") {
@@ -60,6 +61,7 @@ function Grupr() {
         handleErrnLoading(validateUrls);
         return;
       }
+      setIsLoading(false);
 
       // if no error, save to database
       const { code, fullUrl } = await saveGrupr({
