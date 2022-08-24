@@ -3,24 +3,35 @@ import { db } from "../../config";
 import { setDoc, doc } from "firebase/firestore";
 import fs from "fs";
 import path from "path";
+import { customAlphabet } from "nanoid";
 
 const filePath = path.resolve(".", "images_folder/img.png");
 const imageBuffer = fs.readFileSync(filePath);
 
 export default async function (req: any, res: any) {
-  //   const data = { host: req.rawHeaders[1], body: req.body };
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+  // generate a random id for the grup
+  const getHash = customAlphabet(characters, 6);
+  const id = getHash();
+  const { method, url, headers } = req;
+  var ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress || null;
+
+  const data = { ip, method, url, headers };
+
   res.setHeader("Content-Type", "image/jpg");
   try {
     //  save user info to db and use user id as doc id
-    await setDoc(doc(db, "test", "dfgfefw432435ffd"), req);
+    await setDoc(doc(db, "test", id), data);
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     return res.status(302).json({
       code: 404,
       message: "failed",
+      err,
     });
   }
-  res.send(imageBuffer);
+  return res.send(imageBuffer);
 
   //   rawHeaders
   // save {host:req.rawHeaders[1],body:req.body }
