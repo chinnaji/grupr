@@ -8,7 +8,7 @@ export const handleGruprValidation = (urls: Array<string>) => {
       new URL(urls[i]);
     } catch (e) {
       // console.log(e);
-      return `Invalid Url - ${urls[i]}`;
+      return `Invalid Url - ${urls[i]}, try http://${urls[i]}`;
     }
   }
   return urls;
