@@ -7,14 +7,14 @@ import { FiExternalLink } from "react-icons/fi";
 import axios from "axios";
 import {
   saveGrupr,
-  handleCsv,
+  readCsv,
   handleGruprValidation,
 } from "../helpers/handleGruprSubmit";
 import CopyToClipboard from "./CopyToClipboard";
 import Share from "./Share";
 import { checkAuth } from "../helpers/checkAuth";
 import Link from "next/link";
-// import {handleCsv} from "../helpers/handleCsvSubmit";
+// import {readCsv} from "../helpers/readCsvSubmit";
 function Grupr() {
   const [isExcel, setisExcel] = useState(false);
   const [isModal, setIsModal] = useState(false);
@@ -26,7 +26,6 @@ function Grupr() {
   const [err, setErr] = useState("");
   const user = checkAuth();
   const createdBy = user ? user.uid : "Anonymous";
-  // console.log({ createdBy });
 
   const handleErrnLoading = (err: string) => {
     setErr(err);
@@ -38,13 +37,18 @@ function Grupr() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
+    // validate title length
+    if (title.length < 1) {
+      handleErrnLoading("Please provide a title");
+      return;
+    }
+    // start loading animation
     setIsLoading(true);
-    var newUrls = [];
+    // var newUrls = [];
     // if csv file is uploaded
     if (isExcel) {
       // get csv files as array
-      const newUrls = await handleCsv(excelFile);
+      const newUrls = await readCsv(excelFile);
       // check type of newUrls
       // if type is string, means error
       if (typeof newUrls === "string") {
@@ -75,14 +79,6 @@ function Grupr() {
       }
       // console.log(validateUrls);
     } else {
-      if (title.length < 1) {
-        handleErrnLoading("Please provide a title");
-        return;
-      }
-      // if (textArealinks.length < 5) {
-      //   handleErrnLoading("Please provide some links");
-      //   return;
-      // }
       const urls = textArealinks.trim().split("\n");
       // validate urls
       const validateUrls = handleGruprValidation(urls);
@@ -91,7 +87,8 @@ function Grupr() {
         handleErrnLoading(validateUrls);
         return;
       }
-
+      // console.log(validateUrls);
+      // setIsLoading(false);
       // if no error, save to database
       const { code, fullUrl } = await saveGrupr({
         urls: validateUrls,
@@ -99,8 +96,11 @@ function Grupr() {
         title,
       });
       if (code === 200) {
+        // update full url
         setGrupUrl(fullUrl);
+        // open modal
         setIsModal(true);
+        // end loading animation
         setIsLoading(false);
       } else {
         handleErrnLoading("Error creating Grup, Please try again");

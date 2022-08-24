@@ -1,24 +1,23 @@
 import axios from "axios";
 import { TgetShortenDataProps, TsubmitProps } from "../types";
+import urlRegex from "url-regex";
 
 export const handleGruprValidation = (urls: any) => {
-  const newUrls = [];
+  const newUrls: any = [];
   // const urls = links.trim().split("\n");
   // console.log({ urls });
   for (let i = 0; i < urls.length; i++) {
-    const formatProtocol =
-      urls[i].slice(0, 2) == "//"
-        ? "http:" + urls[i]
-        : urls[i].slice(0, 3) == "www"
-        ? "http://" + urls[i]
-        : urls[i]; //dummy protocol so that URL works
-    console.log({ formatProtocol });
-    try {
-      const checkUrl = new URL(formatProtocol);
-      newUrls.push(checkUrl.href);
-      // console.log({ checkUrl });
-    } catch (e: any) {
+    // check if each url is valid
+    const testUrl = urlRegex({ exact: true, strict: true }).test(urls[i]);
+    // ? urls[i]
+    // : false;
+    if (!testUrl) {
       return "Invalid Url, please check again";
+    }
+    if (urls[i].includes("https://") || urls[i].includes("http://")) {
+      newUrls.push(urls[i]);
+    } else {
+      newUrls.push("http://" + urls[i]);
     }
   }
   return newUrls;
@@ -38,7 +37,7 @@ function readFileAsync(file: any) {
   });
 }
 
-export const handleCsv = async (excelFile: any) => {
+export const readCsv = async (excelFile: any) => {
   // console.log(excelFile);
   try {
     let csvData: any = await readFileAsync(excelFile);
