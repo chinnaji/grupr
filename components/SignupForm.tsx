@@ -75,11 +75,7 @@ function SignupForm() {
           placeholder="Password"
           className="p-3 my-3  outline-none focus:border-1 focus:border-purple-200 rounded-md bg-purple-100 text-purple-300 w-full"
         />
-        <LoadingButton
-          isLoading={isLoading}
-          onClick={signUpWithEmailAndPassword}
-          text="Sign Up"
-        />
+        <LoadingButton isLoading={isLoading} text="Sign Up" />
 
         <SignInWithGoogle setMessage={setMessage} text="Sign Up With Google" />
         <p className="mt-7 text-center">

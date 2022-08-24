@@ -71,3 +71,7 @@ export interface dashboardListProps {
     title: string;
   };
 }
+export interface loadingButtonProps {
+  isLoading: boolean;
+  text: string;
+}

@@ -26,14 +26,16 @@ function LoginForm() {
   });
 
   const router = useRouter();
+
   // login Function
   const logIn = (event: any) => {
     event.preventDefault();
-
+    // start loading animation
+    setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((res) => {
         // stop loading animation
-        setIsLoading(false);
+        // setIsLoading(false);
         router.push("/dashboard");
         // history.back()
       })
@@ -98,11 +100,7 @@ function LoginForm() {
           placeholder="Password"
           className="p-3 my-3  outline-none focus:border-1 focus:border-purple-200 rounded-md bg-purple-100 text-purple-300 w-full"
         />
-        <LoadingButton
-          isLoading={isLoading}
-          onClick={signInWithEmailAndPassword}
-          text="Log In"
-        />
+        <LoadingButton isLoading={isLoading} text="Log In" />
         <SignInWithGoogle setMessage={setMessage} text="Log In With Google" />
 
         <p className="mt-7 text-center">

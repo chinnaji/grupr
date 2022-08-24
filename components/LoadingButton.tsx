@@ -1,9 +1,8 @@
 import React from "react";
-
-function LoadingButton({ isLoading, setIsLoading, text, callback }: any) {
+import { loadingButtonProps } from "../types";
+function LoadingButton({ isLoading, text }: loadingButtonProps) {
   return (
     <button
-      onClick={!isLoading && callback}
       type="submit"
       className="px-2 py-4 outline-none flex items-center justify-center gap-x-2 rounded-md text-zinc-100 font-semibold hover:bg-purple-500 transition-all ease-in-out bg-purple-400  mt-3 w-full"
     >
