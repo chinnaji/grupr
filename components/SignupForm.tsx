@@ -27,7 +27,7 @@ function SignupForm() {
       // stop loading animation
       setIsLoading(false);
       // redirect to dashboard after successful login
-      router.push("/dashboard");
+      router.push("/d");
     } catch (err) {
       setMessage((err as Error).message.replaceAll("Firebase:", ""));
       // console.log(err);

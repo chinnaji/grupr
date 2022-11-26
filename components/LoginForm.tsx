@@ -36,7 +36,7 @@ function LoginForm() {
       .then((res) => {
         // stop loading animation
         // setIsLoading(false);
-        router.push("/dashboard");
+        router.push("/d");
         // history.back()
       })
       .catch((err) => {
@@ -61,7 +61,7 @@ function LoginForm() {
       // console.log(saveUserDataToDb);
 
       // redirect to dashboard
-      router.push("/dashboard");
+      router.push("/d");
     } catch (err) {
       alert(err);
       // setMessage(err.toString())

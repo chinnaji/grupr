@@ -21,7 +21,6 @@ function Navbar() {
     <header className="shadow-xs max-h-[105px] border-b border-b-purple-200/5  w-full text-zinc-600 fixed top-0 bg-white/80 backdrop-blur-lg  z-50">
       <nav className=" max-w-6xl mx-auto flex items-center justify-between px-6 md:px-3 ">
         <Link href="/" className=" w-24 h-16  relative cursor-pointer block">
-
           <Image
             src={logo}
             layout="fill"
@@ -29,7 +28,6 @@ function Navbar() {
             priority
             loading="eager"
           />
-
         </Link>
         <div
           className={`flex lg:p-0 p-5 lg:flex-row justify-center lg:-left-[0vw] transition-all ease-linear duration-200 flex-col lg:relative fixed lg:h-fit h-screen lg:bg-transparent bg-white inset-0 ${
@@ -39,28 +37,25 @@ function Navbar() {
           <Link
             href="/"
             className="lg:hover:bg-transparent hover:bg-zinc-50 transition-all ease-linear duration-100  hover:text-purple-400 flex flex-col items-center  px-4 py-4 rounded lg:py-2 my-6 lg:my-1 font-medium text-md"
-            onClick={() => setIsSidebar(false)}>
-            
-              Home
-            
+            onClick={() => setIsSidebar(false)}
+          >
+            Home
           </Link>
           {checkAuth() && (
             <Link
-              href="/dashboard"
+              href="/d"
               className="lg:hover:bg-transparent hover:bg-zinc-50 transition-all ease-linear duration-100  hover:text-purple-400 flex flex-col items-center  px-4 py-4 rounded lg:py-2 my-6 lg:my-1 font-medium text-md"
-              onClick={() => setIsSidebar(false)}>
-              
-                Dashboard
-              
+              onClick={() => setIsSidebar(false)}
+            >
+              Dashboard
             </Link>
           )}
           <Link
             href="/#features"
             className="lg:hover:bg-transparent hover:bg-zinc-50 transition-all ease-linear duration-100  hover:text-purple-400 flex flex-col items-center  px-4 py-4 rounded lg:py-2 my-6 lg:my-1 font-medium text-md"
-            onClick={() => setIsSidebar(false)}>
-            
-              Features
-            
+            onClick={() => setIsSidebar(false)}
+          >
+            Features
           </Link>
           {/* <Link href="/api-v1">
             <a
@@ -83,18 +78,16 @@ function Navbar() {
               <Link
                 href="/login"
                 className="lg:bg-transparent bg-purple-100 lg:hover:text-purple-400 flex flex-col items-center  px-4 py-4 lg:py-2 mt-4 mb-0 lg:mt-1 lg:mb-1 font-medium text-md"
-                onClick={() => setIsSidebar(false)}>
-                
-                  Log In
-                
+                onClick={() => setIsSidebar(false)}
+              >
+                Log In
               </Link>
               <Link
                 href="/signup"
                 className="hover:bg-purple-500 transition-all ease-in-out bg-purple-400  text-zinc-100 rounded-md flex flex-col items-center  px-4 py-4 lg:py-2 my-6 lg:my-1 font-medium text-md"
-                onClick={() => setIsSidebar(false)}>
-                
-                  Sign Up
-                
+                onClick={() => setIsSidebar(false)}
+              >
+                Sign Up
               </Link>
             </>
           )}

@@ -29,7 +29,7 @@ function SignInWithGoogle({ setMessage, text }: any) {
 
       // redirect to dashboard
       setIsLoading(true);
-      router.push("/dashboard");
+      router.push("/d");
     } catch (err) {
       // stop loading animation
       setIsLoading(false);
