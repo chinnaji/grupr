@@ -20,10 +20,9 @@ function DashboardList({ data }: dashboardListProps) {
     <div className="bg-purple-100 hover:bg-purple-400/10 transition-all ease-in-out duration-200 text-purple-400 flex items-center rounded-md  max-w-3xl w-full mx-auto px-5 ">
       <div className="flex flex-col mr-auto overflow-hidden max-w-[70%] ">
         <h3 className="text-zinc-800 w-full truncate">{data.title}</h3>
-        <Link href={"/" + data.grupId}>
-          <a className=" md:text-md text-sm font-medium ">
-            grupr.nl/{data.grupId}
-          </a>
+        <Link href={"/" + data.grupId} className=" md:text-md text-sm font-medium ">
+          grupr.nl/{data.grupId}
+
         </Link>
       </div>
 

@@ -65,8 +65,8 @@ function Index({ userData }: TdashboardProps) {
         {userData.userGrups.length < 0 ? (
           <p className="text-center gap-x-1 text-lg -mt-5 w-full justify-center  flex ">
             No grups.{"  "}
-            <Link href="/dashboard#grupr">
-              <a className="text-purple-400"> Create Now! </a>
+            <Link href="/dashboard#grupr" className="text-purple-400">
+               Create Now! 
             </Link>
           </p>
         ) : (

@@ -28,7 +28,7 @@ function error() {
             Sorry about that! Please visit our hompage to get where you need to
             go.
           </p>
-          <Link href="/" passHref>
+          <Link href="/" passHref legacyBehavior>
             <button className="w-full lg:w-auto my-4 rounded-md px-1 sm:px-16 py-3 bg-teal text-white bg-orange-500 font-semibold focus:outline-none focus:ring-2 focus:ring-orange-700 focus:ring-opacity-50">
               Go back to Homepage
             </button>
