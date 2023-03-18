@@ -80,7 +80,7 @@ function Footer() {
         ) : null}
       </form>
       <section className="py-5 px-3  border-t">
-        <p className="text-md md:text-xl max-w-3xl mx-auto text-center relative text-zinc-600">
+        <p className="hidden text-md md:text-xl max-w-3xl mx-auto text-center relative text-zinc-600">
           Made With <BsHeartFill className="text-red-600/70 inline" /> by{" "}
           <a
             href="https://github.com/chinnaji"
